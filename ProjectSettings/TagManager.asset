@@ -8,16 +8,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Element
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Rotators
+  - Walls
+  - Shredder
+  - Coins
+  - Item
+  - FreeElements
+  - Destroyer
   - 
   - 
   - 
