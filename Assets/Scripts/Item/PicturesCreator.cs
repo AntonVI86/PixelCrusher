@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PicturesCreator : ObjectPool
+public class PicturesCreator : MonoBehaviour
 {
     [SerializeField] private GameObject _spriteTemplate;
     [SerializeField] private Texture2D _picture;
@@ -11,26 +11,33 @@ public class PicturesCreator : ObjectPool
     private int rowCount;
     private int colCount;
 
+    private void Start()
+    {
+        GenerateGrid(transform.position.x, transform.position.y);
+    }
+
     public void GenerateGrid(float startXPos, float startYPos)
     {
+        float step = 0.09f;
+
         rowCount = _picture.width;
         colCount = _picture.height;
 
-        for (int i = 0; i < rowCount; i++)
+        for (int i = 0; i < colCount; i++)
         {
-            for (int j = 0; j < colCount; j++)
+            for (int j = 0; j < rowCount; j++)
             {
-                startXPos += 0.1f;
+                startXPos += step;
 
-                if (_picture.GetPixel(i, j).a != 0)
+                if (_picture.GetPixel(j, i).a != 0)
                 {
                     GameObject newSprite = Instantiate(_spriteTemplate, transform);
                     newSprite.transform.position = new Vector2(startXPos, startYPos);
-                    newSprite.GetComponent<SpriteRenderer>().color = _picture.GetPixel(i, j);
+                    newSprite.GetComponent<SpriteRenderer>().color = _picture.GetPixel(j, i);
                 }
             }
 
-            startYPos += 0.1f;
+            startYPos += step;
             startXPos = transform.position.x;
         }
     }

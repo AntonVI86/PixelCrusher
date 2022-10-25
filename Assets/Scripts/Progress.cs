@@ -1,44 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Progress : MonoBehaviour
 {
-    [SerializeField] private int _coinsCount = 0;
+    [SerializeField] private int _currentCoins;
+    [SerializeField] private int _coinsToNextDrawing;
+    [SerializeField] private int _maxCoins;
+    [SerializeField] private int _costStepRise = 25;
+
+    public event UnityAction Paused;
+    public event UnityAction<Progress> MoneyChanged;
+    public event UnityAction Reached;
 
     private bool _isCanDraw;
-    private int _maxCoins = 100;
-    private int _cost = 5;
+    private int _cost = 10;
 
-    public int CoinsCount => _coinsCount;
+    public int CoinsCount => _currentCoins;
+    public int MaxCoins => _maxCoins;
     public bool IsCanDraw => _isCanDraw;
 
     private void Start()
     {
         _isCanDraw = true;
+        Paused?.Invoke();
+        MoneyChanged?.Invoke(this);
     }
 
     public void AddCoins(Coin coin)
     {
-        _coinsCount += coin.Price;
+        _currentCoins += coin.Price;
+        MoneyChanged?.Invoke(this);
 
-        if(_coinsCount >= _maxCoins)
+        if(_currentCoins >= _coinsToNextDrawing)
         {
-            Time.timeScale = 0;
+            Paused?.Invoke();
             _isCanDraw = true;
-            _maxCoins *= 3;
+            _coinsToNextDrawing += _maxCoins/3;
+        }
+
+        if(_currentCoins >= _maxCoins)
+        {
+            Reached?.Invoke();
         }
     }
 
     public void SendMoney()
     {
-        _coinsCount -= _cost;
+        _currentCoins -= _cost;
+        MoneyChanged?.Invoke(this);
 
-        if(_coinsCount < _cost)
+        if(_currentCoins < _cost)
         {
-            _isCanDraw =false;
-            Time.timeScale = 1;
-            _cost += 1;
+            _isCanDraw = false;
+            _cost += _costStepRise;
         }
     }
 
