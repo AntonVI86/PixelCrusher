@@ -61,6 +61,7 @@ public class LineDrawer : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         _fingerPositions.Add(newFingerPosition);
         _line.positionCount++;
         _line.SetPosition(_line.positionCount - 1, newFingerPosition);
+        
         _collider.points = _fingerPositions.ToArray();
 
         if(_audioSource.isPlaying == false)

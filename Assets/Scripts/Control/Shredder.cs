@@ -6,7 +6,7 @@ using UnityEngine;
 public class Shredder : ObjectPool
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private GameObject[] _coinPrefab;
+    [SerializeField] private List<GameObject> _coinPrefab;
 
     [SerializeField] private Progress _progress;
 
@@ -26,15 +26,15 @@ public class Shredder : ObjectPool
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.TryGetComponent(out ElementCollision element))
+        if (TryGetObject(out GameObject coin))
         {
-            if (TryGetObject(out GameObject coin))
+            if (collision.gameObject.TryGetComponent(out ElementCollision element))
             {
                 int index = Random.Range(0, _spawnPoints.Length);
 
                 _audioSource.PlayOneShot(_coinSound);
                 coin.GetComponent<Coin>().Destroyed += OnCoinDestroyed;
-                SetCoin(coin, new Vector2(Random.Range(_spawnPoints[0].position.x, _spawnPoints[_spawnPoints.Length-1].position.x), _spawnPoints[0].position.y)); 
+                SetCoin(coin, new Vector2(Random.Range(_spawnPoints[0].position.x, _spawnPoints[_spawnPoints.Length - 1].position.x), _spawnPoints[0].position.y));
             }
         }
     }

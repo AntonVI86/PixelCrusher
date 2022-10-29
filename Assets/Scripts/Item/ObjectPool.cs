@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _container;
-    [SerializeField] private int _capacity;
+    [SerializeField] protected int _capacity;
 
     private List<GameObject> _pool = new List<GameObject>();
 
@@ -21,15 +21,23 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    protected void Initialize(GameObject[] prefabs) 
+    protected void Initialize(List<GameObject> prefabs) 
     {
         for (int i = 0; i < _capacity; i++)
         {
-            int randomIndex = Random.Range(0, prefabs.Length);
+            int randomIndex = Random.Range(0, prefabs.Count);
             GameObject spawned = Instantiate(prefabs[randomIndex], _container.transform);
             spawned.SetActive(false);
 
             _pool.Add(spawned);
+        }
+    }
+
+    protected void AddChilds()
+    {
+        foreach (var item in _pool)
+        {
+            item.GetComponent<PicturesCreator>().GenerateGrid(transform.position.x, transform.position.y);
         }
     }
 

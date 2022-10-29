@@ -23,19 +23,19 @@ Physics2DSettings:
     serializedVersion: 2
     useMultithreading: 1
     useConsistencySorting: 1
-    m_InterpolationPosesPerJob: 100
-    m_NewContactsPerJob: 10
+    m_InterpolationPosesPerJob: 30
+    m_NewContactsPerJob: 5
     m_CollideContactsPerJob: 5
-    m_ClearFlagsPerJob: 100
-    m_ClearBodyForcesPerJob: 100
+    m_ClearFlagsPerJob: 200
+    m_ClearBodyForcesPerJob: 200
     m_SyncDiscreteFixturesPerJob: 50
     m_SyncContinuousFixturesPerJob: 50
     m_FindNearestContactsPerJob: 50
     m_UpdateTriggerContactsPerJob: 100
-    m_IslandSolverCostThreshold: 100
-    m_IslandSolverBodyCostScale: 1
-    m_IslandSolverContactCostScale: 10
-    m_IslandSolverJointCostScale: 10
+    m_IslandSolverCostThreshold: 50
+    m_IslandSolverBodyCostScale: 50
+    m_IslandSolverContactCostScale: 50
+    m_IslandSolverJointCostScale: 50
     m_IslandSolverBodiesPerJob: 50
     m_IslandSolverContactsPerJob: 50
   m_SimulationMode: 0
