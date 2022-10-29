@@ -8,13 +8,10 @@ public class PicturesCreator : MonoBehaviour
     [SerializeField] private GameObject _spriteTemplate;
     [SerializeField] private Texture2D _picture;
 
+    public List<GameObject> _elements = new List<GameObject>();
+
     private int rowCount;
     private int colCount;
-
-    private void Start()
-    {
-        GenerateGrid(transform.position.x, transform.position.y);
-    }
 
     public void GenerateGrid(float startXPos, float startYPos)
     {
@@ -34,6 +31,7 @@ public class PicturesCreator : MonoBehaviour
                     GameObject newSprite = Instantiate(_spriteTemplate, transform);
                     newSprite.transform.position = new Vector2(startXPos, startYPos);
                     newSprite.GetComponent<SpriteRenderer>().color = _picture.GetPixel(j, i);
+                    _elements.Add(newSprite);
                 }
             }
 

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9103902199711905747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9103902199711905757}
+  - component: {fileID: 9103902199711905746}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9103902199711905757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103902199711905747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.85, y: 9.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9103902199711905746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103902199711905747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d900642381f2f2459107a0a4392677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 9103902199711905747}
+  _capacity: 15
+  _globalCollection:
+  - {fileID: 6693074461090832436, guid: 8c78cf08f44d8b04eb434c6861eeea8c, type: 3}
+  - {fileID: 588863736546111238, guid: 46ad37f17472f4c4aa27c66b5250d9a2, type: 3}
+  - {fileID: 5406368112429713530, guid: 70bdc4b63cb3a4644a84ac111daca749, type: 3}
+  - {fileID: 7411417544916096641, guid: fe1c8d20a18687543843b8c9c899e83a, type: 3}
+  - {fileID: 7768183288127938004, guid: 98942d3c501f7ad4097a583953b2d68c, type: 3}
+  - {fileID: 3245664127817328892, guid: 875fc8d8f4a6a2044bfe25b2189979f4, type: 3}
+  - {fileID: 38099301529924150, guid: d2b91de2c9361234bb36a9f956cb68e8, type: 3}
+  _timeBetweenSpawn: 5
