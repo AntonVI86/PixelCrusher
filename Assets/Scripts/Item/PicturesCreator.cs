@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PicturesCreator : MonoBehaviour
 {
-    [SerializeField] private GameObject _spriteTemplate;
+    [SerializeField] private ElementCollision _spriteTemplate;
     [SerializeField] private Texture2D _picture;
 
-    public List<GameObject> _elements = new List<GameObject>();
+    public List<ElementCollision> _elements = new List<ElementCollision>();
 
     private int rowCount;
     private int colCount;
 
     public void GenerateGrid(float startXPos, float startYPos)
     {
-        float step = 0.09f;
+        float step = 0.1f;
 
         rowCount = _picture.width;
         colCount = _picture.height;
@@ -28,9 +26,9 @@ public class PicturesCreator : MonoBehaviour
 
                 if (_picture.GetPixel(j, i).a != 0)
                 {
-                    GameObject newSprite = Instantiate(_spriteTemplate, transform);
+                    ElementCollision newSprite = Instantiate(_spriteTemplate, transform);
                     newSprite.transform.position = new Vector2(startXPos, startYPos);
-                    newSprite.GetComponent<SpriteRenderer>().color = _picture.GetPixel(j, i);
+                    newSprite.GetColor(_picture, j, i);
                     _elements.Add(newSprite);
                 }
             }

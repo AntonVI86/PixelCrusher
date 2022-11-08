@@ -34,9 +34,11 @@ public class ProgressView : MonoBehaviour
 
     private IEnumerator ChangeBarValue()
     {
+        float speed = 50f;
+
         while(_progressBar.value != _progress.CoinsCount)
         {
-            _progressBar.value = Mathf.MoveTowards(_progressBar.value, _progress.CoinsCount, 50f * Time.deltaTime);
+            _progressBar.value = Mathf.MoveTowards(_progressBar.value, _progress.CoinsCount, speed * Time.deltaTime);
             yield return null;
         }
     }
