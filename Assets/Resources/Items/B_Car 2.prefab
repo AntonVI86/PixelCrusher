@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8a3f258fd061f47b525715e9a035ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteTemplate: {fileID: 794567618485576888, guid: c127f7415bd731140bb701e49ac4b0e1, type: 3}
+  _spriteTemplate: {fileID: 2633815433136969463, guid: c127f7415bd731140bb701e49ac4b0e1, type: 3}
   _picture: {fileID: 2800000, guid: 1496b24ca2a1cc7488b3105bbdd055a8, type: 3}
   _elements: []
 --- !u!50 &7768183288127938008

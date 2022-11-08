@@ -46,12 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 9103902199711905747}
   _capacity: 15
+  _pool: []
   _globalCollection:
   - {fileID: 6693074461090832436, guid: 8c78cf08f44d8b04eb434c6861eeea8c, type: 3}
-  - {fileID: 588863736546111238, guid: 46ad37f17472f4c4aa27c66b5250d9a2, type: 3}
   - {fileID: 5406368112429713530, guid: 70bdc4b63cb3a4644a84ac111daca749, type: 3}
+  - {fileID: 6150530904804682898, guid: a93c521a5ae59ea4ba7ed1bf3f6e41fb, type: 3}
   - {fileID: 7411417544916096641, guid: fe1c8d20a18687543843b8c9c899e83a, type: 3}
-  - {fileID: 7768183288127938004, guid: 98942d3c501f7ad4097a583953b2d68c, type: 3}
+  - {fileID: 8725511280220026291, guid: 812e2dd42feaec247a97110fe54855fa, type: 3}
+  - {fileID: 8721441723899048453, guid: 72408918e858cf94daf3d0a549571036, type: 3}
+  - {fileID: 588863736546111238, guid: 46ad37f17472f4c4aa27c66b5250d9a2, type: 3}
   - {fileID: 3245664127817328892, guid: 875fc8d8f4a6a2044bfe25b2189979f4, type: 3}
+  - {fileID: 7768183288127938004, guid: 98942d3c501f7ad4097a583953b2d68c, type: 3}
   - {fileID: 38099301529924150, guid: d2b91de2c9361234bb36a9f956cb68e8, type: 3}
-  _timeBetweenSpawn: 5
+  _timeBetweenSpawn: 3
+  _objects: []
