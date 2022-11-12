@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class Spawner : ObjectPool
 {
@@ -10,21 +11,29 @@ public class Spawner : ObjectPool
 
     private List<GameObject> _objects = new List<GameObject>();
 
-    public const string ItemAmount = "ItemAmount";
-
     public event UnityAction Losted;
     public event UnityAction<int> CountChanged;
 
     private int _itemCount;
-    private int _itemInWave = 3;
-    private float _timeToLoose = 15f;
 
     private Coroutine _coroutine;
 
     private void Awake()
     {
-        AddObjectToSpawner();
-        GetCapacity();
+        for (int i = 0; i < _globalCollection.Count; i++)
+        {
+            if (_globalCollection[i].GetComponent<Item>().IsUnblocked)
+            {
+                _objects.Add(_globalCollection[i]);
+            }
+        }
+
+        _capacity = 15;
+
+        if(_capacity < PlayerPrefs.GetInt("itemAmount"))
+        {
+            _capacity = PlayerPrefs.GetInt("itemAmount");
+        }
     }
 
     private void OnDisable()
@@ -36,11 +45,10 @@ public class Spawner : ObjectPool
     private void Start()
     {
         CountChanged?.Invoke(_itemCount);
-
         Initialize(_objects);
         AddChilds();
 
-        _itemCount = Capacity;
+        _itemCount = _capacity;
 
         if (_coroutine != null)
             StopCoroutine(_coroutine);
@@ -50,27 +58,17 @@ public class Spawner : ObjectPool
 
     private IEnumerator StartSpawn()
     {
-        var delay = new WaitForSeconds(_timeBetweenSpawn);
-
         while(true)
         {
-            if (_itemInWave > 0)
+            if(TryGetObject(out GameObject item))
             {
-                if (TryGetItemObject(out GameObject item))
-                {
-                    item.GetComponent<Item>().Destroyed += OnItemDestroyed;
-
-                    item.SetActive(true);
-                    item.transform.position = transform.position;
-
-                    _itemCount--;
-                    _itemInWave--;
-
-                    CountChanged?.Invoke(_itemCount);
-                }
+                item.SetActive(true);
+                item.transform.position = transform.position;
+                _itemCount--;
+                CountChanged?.Invoke(_itemCount);
             }
 
-            yield return delay;
+            yield return new WaitForSeconds(_timeBetweenSpawn);
 
             if(_itemCount <= 0)
             {
@@ -81,49 +79,31 @@ public class Spawner : ObjectPool
 
     private IEnumerator EndGame()
     {
-        var delay = new WaitForSeconds(_timeToLoose);
-
         while (true)
         {
-            yield return delay;
+            yield return new WaitForSeconds(15);
 
             Losted?.Invoke();
         }
     }
 
-    public void AddNewItemToNextLevel(GameObject item)
+    public void AddNewItem(GameObject item)
     {
         item.GetComponent<Item>().SetUnblock();
-        PlayerPrefs.SetInt(ItemAmount, Capacity + 1);
+        PlayerPrefs.SetInt("itemAmount", _capacity + 1);
     }
 
-    public void OnItemDestroyed(Item item)
+    public void ExceptItems(List<CardView> list)
     {
-        _itemInWave++;
-
-        item.GetComponent<Item>().Destroyed -= OnItemDestroyed;
-    }
-
-    private void AddObjectToSpawner()
-    {
-        for (int i = 0; i < _globalCollection.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            if (_globalCollection[i].GetComponent<Item>().IsUnblocked)
+            for (int j = 0; j < _objects.Count; j++)
             {
-                _objects.Add(_globalCollection[i]);
+                if(list[i].Item == _objects[j])
+                {
+                    list.Remove(list[i]);
+                } 
             }
         }
-    }
-
-    private int GetCapacity()
-    {
-        Capacity = 15;
-
-        if (Capacity < PlayerPrefs.GetInt(ItemAmount))
-        {
-            Capacity = PlayerPrefs.GetInt(ItemAmount);
-        }
-
-        return Capacity;
     }
 }

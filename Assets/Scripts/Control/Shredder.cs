@@ -47,7 +47,7 @@ public class Shredder : ObjectPool
 
     private void OnCoinDestroyed(Coin coin)
     {
-        coin.Destroyed -= OnCoinDestroyed;
+        coin.GetComponent<Coin>().Destroyed -= OnCoinDestroyed;
 
         _progress.AddCoins(coin);
     }
